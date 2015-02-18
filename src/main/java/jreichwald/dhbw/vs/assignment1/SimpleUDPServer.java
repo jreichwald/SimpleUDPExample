@@ -24,11 +24,12 @@ public class SimpleUDPServer {
 			//Create server socket on port 11111
 			serverSocket = new DatagramSocket(11111);
 			
-			//Create Message Buffer 
-			byte[] buffer = new byte[10];
 			
 			while (true) {
 				_log.debug("Server waiting for UDP datagrams ...");
+				
+				//Create Message Buffer 
+				byte[] buffer = new byte[10];
 				
 				//Create a datagram packet using the message buffer
 				DatagramPacket dp_request = new DatagramPacket(buffer, buffer.length);
