@@ -20,10 +20,11 @@ public class SimpleUDPServer {
 		
 		DatagramSocket serverSocket = null; 
 		
+		int messageCounter = 0; 
+		
 		try {
 			//Create server socket on port 11111
 			serverSocket = new DatagramSocket(11111);
-			
 			
 			while (true) {
 				_log.debug("Server waiting for UDP datagrams ...");
@@ -36,11 +37,24 @@ public class SimpleUDPServer {
 
 				//wait for incoming datagram: blocking call
 				serverSocket.receive(dp_request);
+				messageCounter++; 
+				_log.debug("Received Message #"+messageCounter);
+				
 				
 				//extract message from datagram packet
 				String str = new String(dp_request.getData());
+
+				//Print Stringlength without trimming 
+				_log.debug("Stringlength: " + str.length());
+
+				//Trim string 
+				str=str.trim(); 
+			
+				//Print Stringlength after trimming
+				_log.debug("Trimmed stringlength: " + str.length());
 				
-				_log.debug("Message received. Content: " + str);
+				
+				_log.debug("Message Content: " + str);
 			}
 			
 		} catch (Exception e) {
